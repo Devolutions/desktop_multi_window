@@ -30,8 +30,10 @@ class MultiWindowManager {
 
 
   func hideShow() {
-      for (_, wnd) in windows {
-            if !wnd.isHidden() {
+      for (id, wnd) in windows {
+            // Skip the main window (id 0): cycling it here is a pure side effect of creating/showing
+            // an unrelated sub-window and causes it to visibly flash.
+            if id != 0 && !wnd.isHidden() {
               wnd.hide()
               wnd.show()
             }
