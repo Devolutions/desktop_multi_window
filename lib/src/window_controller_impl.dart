@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -8,7 +9,7 @@ import 'widgets/sub_drag_to_resize_area.dart';
 import 'window_controller.dart';
 
 class WindowControllerMainImpl extends WindowController {
-  final MethodChannel _channel = miltiWindowChannel;
+  final MethodChannel _channel = multiWindowChannel;
 
   // the id of this window
   final int _id;
@@ -77,6 +78,20 @@ class WindowControllerMainImpl extends WindowController {
       'windowId': _id,
       'title': title,
     });
+  }
+
+  @override
+  Future<void> resizable(bool resizable) {
+    if (Platform.isMacOS) {
+      return _channel.invokeMethod('resizable', <String, dynamic>{
+        'windowId': _id,
+        'resizable': resizable,
+      });
+    } else {
+      throw MissingPluginException(
+        'This functionality is only available on macOS',
+      );
+    }
   }
 
   @override

@@ -1,3 +1,8 @@
+## 0.2.0
+
+* Added the ability to determine whether a created window will be resizable or not (macOS only). [#130](https://github.com/MixinNetwork/flutter-plugins/pull/130)
+* [Windows] fix createWindow crash when arguments are null. [#224](https://github.com/MixinNetwork/flutter-plugins/pull/224)
+
 ## 0.1.0
 
 * [BREAK CHANGE] upgrade min flutter version to 3.0.0
